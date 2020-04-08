@@ -1,0 +1,64 @@
+cuts = True, presolve = False, dual = False, strong = None
+time = 0.04863399999885587
+cuts = True, presolve = False, dual = False, strong = 2
+time = 0.048944899999696645
+cuts = True, presolve = False, dual = False, strong = 5
+time = 0.04899010000008275
+cuts = True, presolve = False, dual = False, strong = 9
+time = 0.04899900000054913
+cuts = True, presolve = False, dual = True, strong = 9
+time = 0.05564100000083272
+cuts = True, presolve = False, dual = True, strong = 5
+time = 0.05564860000049521
+cuts = True, presolve = False, dual = True, strong = 2
+time = 0.05636620000041148
+cuts = True, presolve = False, dual = True, strong = None
+time = 0.056977399999595946
+cuts = False, presolve = False, dual = False, strong = 9
+time = 0.059999100000000194
+cuts = False, presolve = False, dual = False, strong = 5
+time = 0.06069480000000005
+cuts = False, presolve = False, dual = False, strong = None
+time = 0.06368839999999998
+cuts = False, presolve = False, dual = False, strong = 2
+time = 0.06552810000000009
+cuts = False, presolve = False, dual = True, strong = None
+time = 0.07326139999999981
+cuts = False, presolve = False, dual = True, strong = 5
+time = 0.07531189999999999
+cuts = False, presolve = False, dual = True, strong = 2
+time = 0.0757576000000002
+cuts = False, presolve = False, dual = True, strong = 9
+time = 0.08193260000000002
+cuts = True, presolve = True, dual = True, strong = 9
+time = 277.31068230000164
+cuts = True, presolve = True, dual = True, strong = 5
+time = 301.00398739999946
+cuts = False, presolve = True, dual = False, strong = 5
+time = 418.9488790999999
+cuts = True, presolve = True, dual = True, strong = 2
+time = 446.4094800999992
+cuts = True, presolve = True, dual = False, strong = 5
+time = 451.48905039999954
+cuts = False, presolve = True, dual = True, strong = 9
+time = 454.97569939999994
+cuts = True, presolve = True, dual = False, strong = 9
+time = 460.4551072000013
+cuts = False, presolve = True, dual = False, strong = 9
+time = 461.5027500000001
+cuts = True, presolve = True, dual = False, strong = 2
+time = 470.0999083000006
+cuts = False, presolve = True, dual = True, strong = 5
+time = 475.51267879999887
+cuts = False, presolve = True, dual = True, strong = 2
+time = 491.35346260000006
+cuts = False, presolve = True, dual = False, strong = 2
+time = 536.5573302999999
+cuts = False, presolve = True, dual = False, strong = None
+time = 700.1264457999999
+cuts = True, presolve = True, dual = False, strong = None
+time = 700.2035099000004
+cuts = False, presolve = True, dual = True, strong = None
+time = 700.2714564000007
+cuts = True, presolve = True, dual = True, strong = None
+time = 700.2963450000007
