@@ -1,0 +1,10 @@
+N = 3, solver = cbc     time = 0.4089642000000002
+N = 3, solver = cplex     time = 0.21322110000000016
+N = 4, solver = cbc     time = 2.5555455
+N = 4, solver = cplex     time = 0.2691384999999995
+N = 5, solver = cbc     time = 36.9334128
+N = 5, solver = cplex     time = 0.622004699999998
+N = 6, solver = cbc     time = 611.4813002000001
+N = 6, solver = cplex     time = 2.729026900000008
+N = 7, solver = cbc     time = 701.7425859
+N = 7, solver = cplex     time = 40.6397199999999

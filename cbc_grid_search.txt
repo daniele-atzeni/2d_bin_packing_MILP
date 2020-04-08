@@ -1,0 +1,128 @@
+cuts = True, presolve = False, dual = False, strong = None
+time = 0.04863399999885587
+cuts = True, presolve = False, dual = False, strong = 2
+time = 0.048944899999696645
+cuts = True, presolve = False, dual = False, strong = 5
+time = 0.04899010000008275
+cuts = True, presolve = False, dual = False, strong = 9
+time = 0.04899900000054913
+cuts = True, presolve = False, dual = False, strong = 9
+time = 0.04903550000017276
+cuts = True, presolve = False, dual = False, strong = 2
+time = 0.04955840000002354
+cuts = True, presolve = False, dual = False, strong = None
+time = 0.05052900000009686
+cuts = True, presolve = False, dual = True, strong = 9
+time = 0.05564100000083272
+cuts = True, presolve = False, dual = True, strong = 5
+time = 0.05564860000049521
+cuts = True, presolve = False, dual = True, strong = 5
+time = 0.05570420000003651
+cuts = True, presolve = False, dual = True, strong = 2
+time = 0.05636620000041148
+cuts = True, presolve = False, dual = True, strong = 9
+time = 0.05657160000009753
+cuts = True, presolve = False, dual = True, strong = 2
+time = 0.056928900001366856
+cuts = True, presolve = False, dual = True, strong = None
+time = 0.056977399999595946
+cuts = True, presolve = False, dual = True, strong = None
+time = 0.059946100000161096
+cuts = False, presolve = False, dual = False, strong = 9
+time = 0.059999100000000194
+cuts = False, presolve = False, dual = False, strong = 5
+time = 0.06069480000000005
+cuts = False, presolve = False, dual = False, strong = 9
+time = 0.06073290000000009
+cuts = False, presolve = False, dual = False, strong = None
+time = 0.06368839999999998
+cuts = False, presolve = False, dual = False, strong = 5
+time = 0.06447429999999987
+cuts = False, presolve = False, dual = False, strong = None
+time = 0.06523770000000018
+cuts = False, presolve = False, dual = False, strong = 2
+time = 0.06552810000000009
+cuts = False, presolve = False, dual = False, strong = 2
+time = 0.06714580000000003
+cuts = False, presolve = False, dual = True, strong = None
+time = 0.07326139999999981
+cuts = False, presolve = False, dual = True, strong = 5
+time = 0.07531189999999999
+cuts = False, presolve = False, dual = True, strong = 2
+time = 0.0757576000000002
+cuts = False, presolve = False, dual = True, strong = None
+time = 0.07608389999999998
+cuts = False, presolve = False, dual = True, strong = 5
+time = 0.07853149999999998
+cuts = False, presolve = False, dual = True, strong = 2
+time = 0.08074929999999991
+cuts = False, presolve = False, dual = True, strong = 9
+time = 0.08193260000000002
+cuts = False, presolve = False, dual = True, strong = 9
+time = 0.0915935000000001
+cuts = True, presolve = False, dual = False, strong = 5
+time = 0.13157409999985248
+cuts = True, presolve = True, dual = True, strong = 9
+time = 277.31068230000164
+cuts = True, presolve = True, dual = True, strong = 5
+time = 301.00398739999946
+cuts = True, presolve = True, dual = True, strong = 5
+time = 377.52137650000077
+cuts = False, presolve = True, dual = False, strong = 5
+time = 418.9488790999999
+cuts = True, presolve = True, dual = True, strong = 2
+time = 446.4094800999992
+cuts = True, presolve = True, dual = False, strong = 5
+time = 451.48905039999954
+cuts = False, presolve = True, dual = True, strong = 9
+time = 454.97569939999994
+cuts = True, presolve = True, dual = False, strong = 9
+time = 460.4551072000013
+cuts = False, presolve = True, dual = False, strong = 9
+time = 461.5027500000001
+cuts = True, presolve = True, dual = False, strong = 2
+time = 470.0999083000006
+cuts = False, presolve = True, dual = True, strong = 5
+time = 475.51267879999887
+cuts = True, presolve = True, dual = True, strong = 2
+time = 481.616028800001
+cuts = False, presolve = True, dual = True, strong = 2
+time = 491.35346260000006
+cuts = False, presolve = True, dual = False, strong = 2
+time = 536.5573302999999
+cuts = True, presolve = True, dual = False, strong = 9
+time = 570.3739964999986
+cuts = False, presolve = True, dual = False, strong = 9
+time = 598.4471715
+cuts = True, presolve = True, dual = False, strong = 2
+time = 624.0903689000006
+cuts = False, presolve = True, dual = False, strong = 2
+time = 636.151132
+cuts = False, presolve = True, dual = True, strong = 9
+time = 655.7990062000008
+cuts = False, presolve = True, dual = True, strong = 2
+time = 700.1181899999992
+cuts = False, presolve = True, dual = False, strong = None
+time = 700.1264457999999
+cuts = False, presolve = True, dual = True, strong = 5
+time = 700.2019363999998
+cuts = True, presolve = True, dual = False, strong = None
+time = 700.2035099000004
+cuts = False, presolve = True, dual = False, strong = 5
+time = 700.2450571999998
+cuts = False, presolve = True, dual = True, strong = None
+time = 700.2714564000007
+cuts = False, presolve = True, dual = False, strong = None
+time = 700.2717516
+cuts = True, presolve = True, dual = True, strong = None
+time = 700.2963450000007
+cuts = False, presolve = True, dual = True, strong = None
+time = 700.2973049000002
+cuts = True, presolve = True, dual = True, strong = None
+time = 700.3409565999991
+cuts = True, presolve = True, dual = False, strong = 5
+time = 700.3509144
+cuts = True, presolve = True, dual = True, strong = 9
+time = 700.3883219000018
+cuts = True, presolve = True, dual = False, strong = None
+time = 701.6149835999986
