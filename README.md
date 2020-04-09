@@ -22,4 +22,9 @@ the create_data method.
  - cbc_grid_search.py:
   It creates an instance of the problem and solves it with different combination of 
   cbc parameters, computes the time needed for each combination and saves everything
-  in cbc_grid_search.txt
+  in cbc_grid_search.txt.
+  
+  - old_M_vs_new_M.py:
+   It creates 5 instances of the problem and solves them using default cplex and a different
+   model which use a different value of M, computes the time needed for each instance 
+   and saves everything in old_M_vs_new_M.txt.
