@@ -1,4 +1,4 @@
-# 2d Bin Packing Mixed Integer Linear Problem with PuLP
+# 2d Bin Packing Mixed Integer Linear Programming with PuLP
 
 In order to run the scripts, you have to add cbc.exe and/or cplex.exe in your repository.
 You can also modify the path variable in selve_cbc and solve_cplex methods in problem.py, 
