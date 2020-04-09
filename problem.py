@@ -7,7 +7,7 @@ from scipy.spatial import ConvexHull
 import pulp
 from pulp import LpProblem, LpMinimize, LpVariable, value, LpStatus, lpSum
 
-from utils import compute_coefficients
+from utils import compute_coefficients, compute_M
 
 class Problem:
 
@@ -24,6 +24,8 @@ class Problem:
         self.b = None
         self.c = None
         self.M = None
+
+        self.is_improvable = None
 
         self.problem = None
 
@@ -51,17 +53,18 @@ class Problem:
                 polygon = ConvexHull(points)
                 self.polygons.append(polygon.points[polygon.vertices])
         
-        self.a, self.b, self.c, self.M = compute_coefficients(self.polygons, self.H)
+        self.a, self.b, self.c = compute_coefficients(self.polygons, self.H)
+        self.M, self.is_improvable = compute_M(self.polygons, self.H, self.a, self.b, self.c)
 
 
     def create_problem(self, filename=None, equality=False):
 
         self.problem = LpProblem('polygons_packing', LpMinimize)
 
-        w = LpVariable('w', 0)
+        self.w = LpVariable('w', 0)
 
-        tx = LpVariable.dicts('tx', range(self.N), 0)
-        ty = LpVariable.dicts('ty', range(self.N), 0)
+        self.tx = LpVariable.dicts('tx', range(self.N), 0)
+        self.ty = LpVariable.dicts('ty', range(self.N), 0)
         z_idx = []
         for i in range(self.N):
             for j in range(i+1, self.N):
@@ -69,23 +72,22 @@ class Problem:
                 K_j = self.polygons[j].shape[0]
                 for v in range(K_i + K_j):
                     z_idx.append((i, j, v))
-        z = LpVariable.dicts('z', z_idx, 0, 1, 'Integer')
+        self.z = LpVariable.dicts('z', z_idx, 0, 1, 'Integer')
 
         # objective
-        self.problem.setObjective(w)
+        self.problem.setObjective(self.w)
 
         # w constraints
         widths = [np.max(pol[:, 0]) - np.min(pol[:, 0]) for pol in self.polygons]
         for i in range(self.N):
-            self.problem += w - tx[i] >= widths[i], f"w_constraint_{i}"
+            self.problem += self.w - self.tx[i] >= widths[i], f"w_constraint_{i}"
 
         # height constraints
         heights = [np.max(pol[:, 1]) - np.min(pol[:, 1]) for pol in self.polygons]
         for i in range(self.N):
-            self.problem += ty[i] <= self.H - heights[i], f"height_constraint_{i}"
+            self.problem += self.ty[i] <= self.H - heights[i], f"height_constraint_{i}"
         
         # non overlapping constraints
-        self.a, self.b, self.c, self.M = compute_coefficients(self.polygons, self.H)
         cnt = 0
         for i in range(self.N):
             for j in range(i+1, self.N):
@@ -94,13 +96,13 @@ class Problem:
                 for v1 in range(K_i):
                     for v2 in range(K_j):
                         # 1
-                        self.problem += self.a[(i, v1)] * tx[j] - self.a[(i, v1)] * tx[i] + \
-                            self.b[(i, v1)] * ty[j] - self.b[(i, v1)] * ty[i] - self.M * z[(i, j, v1)] <= \
+                        self.problem += self.a[(i, v1)] * self.tx[j] - self.a[(i, v1)] * self.tx[i] + \
+                            self.b[(i, v1)] * self.ty[j] - self.b[(i, v1)] * self.ty[i] - self.M * self.z[(i, j, v1)] <= \
                                 - self.c[(i, v1)] - self.a[(i, v1)] * self.polygons[j][v2][0] - self.b[(i, v1)] * self.polygons[j][v2][1], f"non_overlapping_constraint_{cnt}"
                         cnt += 1
                         # 2
-                        self.problem += self.a[(j, v2)] * tx[i] - self.a[(j, v2)] * tx[j] + \
-                            self.b[(j, v2)] * ty[i] - self.b[(j, v2)] * ty[j] - self.M * z[(i, j, K_i + v2)]  <= \
+                        self.problem += self.a[(j, v2)] * self.tx[i] - self.a[(j, v2)] * self.tx[j] + \
+                            self.b[(j, v2)] * self.ty[i] - self.b[(j, v2)] * self.ty[j] - self.M * self.z[(i, j, K_i + v2)]  <= \
                                 - self.c[(j, v2)] - self.a[(j, v2)] * self.polygons[i][v1][0] - self.b[(j, v2)] * self.polygons[i][v1][1], f"non_overlapping_constraint_{cnt}"
                         cnt += 1
         # 3
@@ -109,9 +111,9 @@ class Problem:
                 K_i = self.polygons[i].shape[0]
                 K_j = self.polygons[j].shape[0]
                 if not equality:
-                    self.problem += sum([z[(i, j, v)] for v in range(K_i + K_j)]) <= K_i + K_j - 1, f"non_overlapping_constraint_{cnt}"
+                    self.problem += sum([self.z[(i, j, v)] for v in range(K_i + K_j)]) <= K_i + K_j - 1, f"non_overlapping_constraint_{cnt}"
                 else:
-                    self.problem += sum([z[(i, j, v)] for v in range(K_i + K_j)]) == K_i + K_j - 1, f"non_overlapping_constraint_{cnt}"
+                    self.problem += sum([self.z[(i, j, v)] for v in range(K_i + K_j)]) == K_i + K_j - 1, f"non_overlapping_constraint_{cnt}"
                 cnt += 1
         
         if filename is not None:
@@ -168,6 +170,60 @@ class Problem:
         print(f'time = {self.problem.solutionTime}')
         print(f'status = {LpStatus[self.problem.status]}')
         print(f'objective = {value(self.problem.objective)}')
+    
+
+    def solve_with_M_constr(self,
+            keepFiles=0, 
+            mip=1, 
+            msg=1, 
+            options=[],
+            timelimit = None, 
+            mip_start=False):
+        if self.is_improvable:
+            path = os.path.join(os.getcwd(), 'cplex.exe')
+
+            solver = pulp.solvers.CPLEX_CMD(path, keepFiles, mip, msg=None, options=options, timelimit=5, mip_start=mip_start)
+
+            if self.problem is None:
+                raise ValueError('You must create the model first')
+            
+            # first solve
+            self.problem.solve(solver=solver)
+            print(f'First solve done, new worst case = {value(self.problem.objective)}')
+
+            # compute new M
+            self.M, _ = compute_M(self.polygons, self.H, self.a, self.b, self.c, value(self.problem.objective))
+
+            # add constraints
+            cnt = 0
+            for i in range(self.N):
+                for j in range(i+1, self.N):
+                    K_i = self.polygons[i].shape[0]
+                    K_j = self.polygons[j].shape[0]
+                    for v1 in range(K_i):
+                        for v2 in range(K_j):
+                            # 1
+                            self.problem += self.a[(i, v1)] * self.tx[j] - self.a[(i, v1)] * self.tx[i] + \
+                                self.b[(i, v1)] * self.ty[j] - self.b[(i, v1)] * self.ty[i] - self.M * self.z[(i, j, v1)] <= \
+                                    - self.c[(i, v1)] - self.a[(i, v1)] * self.polygons[j][v2][0] - self.b[(i, v1)] * self.polygons[j][v2][1], f"new_constraint_{cnt}"
+                            cnt += 1
+                            # 2
+                            self.problem += self.a[(j, v2)] * self.tx[i] - self.a[(j, v2)] * self.tx[j] + \
+                                self.b[(j, v2)] * self.ty[i] - self.b[(j, v2)] * self.ty[j] - self.M * self.z[(i, j, K_i + v2)]  <= \
+                                    - self.c[(j, v2)] - self.a[(j, v2)] * self.polygons[i][v1][0] - self.b[(j, v2)] * self.polygons[i][v1][1], f"new_constraint_{cnt}"
+                            cnt += 1
+            
+            # last solve
+            # need to reinitialize solver with timelimiti
+            solver = pulp.solvers.CPLEX_CMD(path, keepFiles, mip, msg, options, timelimit, mip_start)
+            self.problem.solve(solver=solver)
+            
+            print(f'time = {self.problem.solutionTime}')
+            print(f'status = {LpStatus[self.problem.status]}')
+            print(f'objective = {value(self.problem.objective)}')
+        
+        else:
+            self.solve_cplex(keepFiles, mip, msg, options, timelimit, mip_start)
 
 
     def show_original_polygons(self, filename=None):
