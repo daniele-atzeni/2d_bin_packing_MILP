@@ -8,7 +8,6 @@ def compute_coefficients(polygons, H):
     :return: a, b, c, dictionaries (n, v): coefficient of the straight line connecting vertex v with the next
     '''
     N = len(polygons)
-    widths = [np.max(pol[:, 0]) - np.min(pol[:, 0]) for pol in polygons]
     a = {}
     b = {}
     c = {}
@@ -46,17 +45,38 @@ def compute_coefficients(polygons, H):
                 b[(n, v)] = -b[(n, v)]
                 c[(n, v)] = -c[(n, v)]
 
-    # computation of M
-    W = sum(widths)
-    possibleM = []
+    return a, b, c
+
+
+def compute_M(polygons, H, a, b, c, max_w=None):
+
+    N = len(polygons)
+    widths = [np.max(pol[:, 0]) - np.min(pol[:, 0]) for pol in polygons]
+    if max_w is None:
+        W = sum(widths)
+    else:
+        W = max_w
+    M = -float('inf')
+    # check if the maximum is taken in the right side of the roll
+    is_improvable = False
     for n in range(N):
         n_edges = polygons[n].shape[0]
         for v in range(n_edges):
             m1 = c[(n, v)]
+            if m1 >= M:
+                M = m1
+                is_improvable = False
             m2 = b[(n, v)] * H + c[(n, v)]
+            if m2 >= M:
+                M = m2
+                is_improvable = False
             m3 = a[(n, v)] * W + c[(n, v)]
+            if m3 >= M:
+                M = m3
+                is_improvable = True
             m4 = a[(n, v)] * W + b[(n, v)] * H + c[(n, v)]
-            possibleM.extend([m1, m2, m3, m4])
-    M = max(possibleM)
+            if m4 >= M:
+                M = m4
+                is_improvable = True
 
-    return a, b, c, M
+    return M, is_improvable
