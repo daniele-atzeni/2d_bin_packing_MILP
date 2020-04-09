@@ -24,7 +24,7 @@ for N in range(3, 8):
 
     results[(N, 'cplex')] = P.problem.solutionTime
 
-with open('confronto_solver.txt', 'w') as f:
+with open('cbc_vs_cplex.txt', 'w') as f:
     
     for key, val in results.items():
         N, solver = key
