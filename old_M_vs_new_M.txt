@@ -1,0 +1,12 @@
+results with old M
+time at istance 0 = 91.7716981
+time at istance 1 = 26.606028400000014
+time at istance 2 = 179.66013190000012
+time at istance 3 = 11.243523099999948
+time at istance 4 = 146.1673805999999
+results with new M
+time at istance 0 = 64.51389809999999
+time at istance 1 = 67.02433939999992
+time at istance 2 = 103.09060309999995
+time at istance 3 = 5.261385200000177
+time at istance 4 = 118.98115409999991
