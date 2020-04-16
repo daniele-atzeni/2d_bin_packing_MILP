@@ -1,0 +1,8 @@
+results no-fit model
+time with seed 1 = 4.5542644999999995
+time with seed 2 = 16.41957703333333
+time with seed 3 = 6.955759199999998
+results old model
+time with seed 1 = 4.326058166666666
+time with seed 2 = 13.63017796666666
+time with seed 3 = 10.2063078

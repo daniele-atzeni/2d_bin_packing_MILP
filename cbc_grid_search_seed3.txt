@@ -1,0 +1,36 @@
+cuts = on, presolve = on, strong = 5, heur = on
+time = 2.8440121333333335
+cuts = on, presolve = on, strong = 5, heur = off
+time = 1.1912189000000002
+cuts = on, presolve = file, strong = 5, heur = on
+time = 2.6855214333333333
+cuts = on, presolve = file, strong = 5, heur = off
+time = 1.5407005999999999
+cuts = on, presolve = more, strong = 5, heur = on
+time = 2.3880493333333326
+cuts = on, presolve = more, strong = 5, heur = off
+time = 2.4224825
+cuts = ifmove, presolve = on, strong = 5, heur = on
+time = 4.293399
+cuts = ifmove, presolve = on, strong = 5, heur = off
+time = 2.823511200000001
+cuts = ifmove, presolve = file, strong = 5, heur = on
+time = 3.394079033333336
+cuts = ifmove, presolve = file, strong = 5, heur = off
+time = 2.490457033333333
+cuts = ifmove, presolve = more, strong = 5, heur = on
+time = 3.8430462
+cuts = ifmove, presolve = more, strong = 5, heur = off
+time = 1.7617769999999997
+cuts = forceOn, presolve = on, strong = 5, heur = on
+time = 2.500164433333333
+cuts = forceOn, presolve = on, strong = 5, heur = off
+time = 0.9740054666666668
+cuts = forceOn, presolve = file, strong = 5, heur = on
+time = 2.5898915
+cuts = forceOn, presolve = file, strong = 5, heur = off
+time = 1.1661170666666667
+cuts = forceOn, presolve = more, strong = 5, heur = on
+time = 2.8855381333333336
+cuts = forceOn, presolve = more, strong = 5, heur = off
+time = 1.5415350666666667

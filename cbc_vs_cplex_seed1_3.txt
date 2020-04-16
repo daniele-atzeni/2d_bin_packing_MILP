@@ -1,0 +1,6 @@
+seed = 1, solver = cbc     time = 1.019481266666667
+seed = 1, solver = cplex     time = 0.2997711000000007
+seed = 2, solver = cbc     time = 3.0241485000000004
+seed = 2, solver = cplex     time = 0.25390639999999937
+seed = 3, solver = cbc     time = 1.1105654666666662
+seed = 3, solver = cplex     time = 0.2538501666666673
